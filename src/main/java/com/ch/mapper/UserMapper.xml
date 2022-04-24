@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 手动映射-->
+    <resultMap id="BaseResultMap" type="user" autoMapping="true">
+        <id column="id" property="id"/>
+        <!--column 数据库字段名 property表示查询出来的属性对应的值赋给实体对象的属性-->
+        <result column="userCode" property="userCode"/>
+        <result column="userName" property="userName"/>
+        <result column="userPassword" property="userPassword"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="userRole" property="userRole"/>
+        <result column="createdBy" property="createdBy"/>
+        <result column="creationDate" property="creationDate"/>
+        <result column="modifyBy" property="modifyBy"/>
+        <result column="modifyDate" property="modifyDate"/>
+    </resultMap>
+    <select id="queryUserById" resultType="user">
+        select * from smbms_user where id = #{id}
+    </select>
+
+   <!-- <select id="queryUsernameById" resultType="user">
+        select userName from smbms where id = #{id}
+    </select>-->
+    <select id="queryUsernameById" resultMap="BaseResultMap">
+        select userName  from smbms_user where id = #{id}
+    </select>
+
+
+    <select id="queryUserByUserName" resultType="user">
+        select * from smbms_user where userName = #{userName}
+    </select>
+</mapper>
